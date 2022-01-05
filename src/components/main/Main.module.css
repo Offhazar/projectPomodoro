@@ -1,0 +1,123 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 40px 60px;
+  position: absolute;
+  width: 457px;
+  height: 326px;
+  left: 549px;
+  top: 187px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+.btnKing {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  position: static;
+  width: 330px;
+  height: 28px;
+  left: 67px;
+  top: 40px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 6px 0px;
+}
+.btnFoces {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 10px;
+  border: none;
+}
+.btnShort {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 0px 12px;
+  border: none;
+}
+.btnLong {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  margin: 0px 12px;
+  border: none;
+}
+.timer {
+  position: static;
+  width: 337px;
+  height: 146px;
+  left: 60px;
+  top: 74px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 120px;
+  line-height: 146px;
+  color: #ffffff;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 6px 0px;
+}
+.btnStop {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  position: static;
+  width: 241px;
+  height: 60px;
+  left: 176px;
+  top: 226px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  margin: 6px 15px;
+}
+.stop {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 24px;
+  position: static;
+  width: 150px;
+  height: 60px;
+  left: 0px;
+  top: 0px;
+  background: #ffffff;
+  border-radius: 6px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 59px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 44px;
+  text-transform: uppercase;
+  color: #db524d;
+  border: none;
+}
