@@ -5,10 +5,8 @@ import Main from './main/Main';
 const Pomodor = () => {
   return (
     <div className="container">
-      <div>
-        <Navbar />
-        <Main />
-      </div>
+      <Navbar />
+      <Main />
     </div>
   );
 };

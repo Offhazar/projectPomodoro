@@ -1,0 +1,266 @@
+/* NAV */
+
+.classes.container {
+  padding: 1.25rem 1.25rem 0;
+}
+.navModal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.navModal1 {
+  padding: 0px;
+  margin: 0px;
+  width: 400px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+}
+.closes {
+  margin-bottom: 2px;
+}
+.navModal::after {
+  content: '';
+  border: 1px solid #d6d6d6;
+  background-color: black;
+  width: 500px;
+  text-align: end;
+  padding-bottom: 1.5px;
+}
+
+.navModal h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(187, 187, 187);
+  margin-bottom: 1rem;
+}
+
+/* MAIN  */
+
+.mainModal {
+  position: static;
+  width: 100px;
+  height: 15px;
+  left: 0px;
+  top: 0px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+}
+.mainModalInput {
+  display: flex;
+  justify-content: space-between;
+  width: 328px;
+  height: 60px;
+}
+
+.mainModalInput input {
+  position: static;
+  width: 48px;
+  height: 37px;
+  left: 0px;
+  top: 0px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 6px;
+  background: #efefef;
+}
+
+.mainModalInput h6 {
+  position: static;
+  width: 75px;
+  height: 15px;
+  left: 0px;
+  top: 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #bcbcbc;
+}
+
+/* HEADER 1 */
+
+.headerModal {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0px;
+  position: static;
+  width: 440px;
+  height: 31px;
+  left: 0px;
+  top: 0px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  padding-bottom: 40px;
+}
+.headerModal::before {
+  content: '';
+  border: 2px solid #d6d6d6;
+  background-color: black;
+  width: 500px;
+  text-align: end;
+}
+
+.headerModal h4 {
+  position: static;
+  left: 0px;
+  top: 4.5px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+.headerModal input {
+  position: static;
+  left: 335px;
+  top: 0px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* HEADER 2 */
+
+.headerModal2 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+
+  position: static;
+  width: 440px;
+  height: 37px;
+  left: 0px;
+  top: 0px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin-top: 10px;
+  padding-bottom: 40px;
+}
+.headerModal2::before {
+  content: '';
+  border: 2px solid #d6d6d6;
+  background-color: black;
+  width: 500px;
+  height: 0px;
+  text-align: end;
+  margin-top: 10px;
+}
+.headerModal2 h4 {
+  display: flex;
+  align-items: center;
+  position: static;
+  left: 0px;
+  top: 4.5px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.headerModal2 input {
+  position: static;
+  left: 335px;
+  top: 0px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* HEADER 3 */
+
+.headerModal3 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 10px;
+  position: static;
+  width: 440px;
+  height: 37px;
+  left: 0px;
+  top: 0px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin-top: 10px;
+  padding-bottom: 40px;
+}
+
+.headerModal3::before {
+  content: '';
+  border: 2px solid #d6d6d6;
+  background-color: black;
+  width: 500px;
+  height: 0px;
+  text-align: end;
+  margin-top: 10px;
+}
+
+.headerModal3 h4 {
+  display: flex;
+  align-items: center;
+  position: static;
+  left: 0px;
+  top: 4.5px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+.headerModal3 input {
+  position: static;
+  width: 48px;
+  height: 37px;
+  left: 336px;
+  top: 0px;
+  background: #efefef;
+  border-radius: 6px;
+  border: none;
+}
+
+/* footer*/
+
+.footer {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 35px;
+}
+
+.footer::before {
+  content: '';
+  border: 2px solid #d6d6d6;
+  background-color: black;
+  width: 436px;
+  height: 0px;
+  text-align: end;
+  margin-top: 10px;
+}
+.footer button {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 79px;
+  height: 49px;
+  background: #373737;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
+  border-radius: 6px;
+  border: none;
+}

@@ -1,0 +1,18 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.box {
+  background: #db524d;
+  width: 100vw;
+  height: 100vh;
+}
+
+.shortpage {
+  background: rebeccapurple;
+}
+.longpage {
+  background: chartreuse;
+}
