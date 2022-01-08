@@ -4,12 +4,17 @@ import group2 from '../../assets/Group2.png';
 import group3 from '../../assets/Group3.png';
 import { useDispatch } from 'react-redux';
 import { showAction } from '../../store/Switch';
+import React from 'react';
+import ModalPomo from '../../UI/ModalPomo';
+import ModalOverlay from '../modalOverlay/ModalOverlay';
 
 const Navbar = (props) => {
-  const dispatch = useDispatch();
-  const modalIsSHowHandler = () => {
-    dispatch(showAction.toggle());
-  };
+  const [isShow, setIsShow] = React.useState(false);
+
+  function modalIsSHowHandler() {
+    setIsShow((prev) => (prev = !prev));
+  }
+
   return (
     <>
       <div className={classes.headerContainer}>
@@ -29,6 +34,12 @@ const Navbar = (props) => {
       <div className={classes.headerLine}>
         <img src={group3} />
       </div>
+
+      {isShow && (
+        <ModalPomo onCloseModal={setIsShow}>
+          <ModalOverlay onCloseModal={setIsShow} />
+        </ModalPomo>
+      )}
     </>
   );
 };

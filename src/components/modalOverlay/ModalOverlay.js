@@ -3,13 +3,15 @@ import close from '../../assets/close.png';
 import { useState } from 'react';
 import { showAction } from '../../store/Switch';
 import { useDispatch } from 'react-redux';
-import { settings } from '../../store/Settings';
+import { setTimes, settings } from '../../store/Settings';
 
-const ModalOverlay = () => {
+const ModalOverlay = (props) => {
   const [pomodoroTime, setPomodoroTime] = useState(0);
   const [shortBreak, setShortBreak] = useState(0);
   const [longBreak, setLongBreak] = useState(0);
-  const disptach = useDispatch();
+
+  const dispatch = useDispatch();
+
   const pomodoroTimeChangeHandler = (e) => {
     setPomodoroTime(e.target.value);
   };
@@ -19,31 +21,33 @@ const ModalOverlay = () => {
   const longBreakTimeChangeHandler = (e) => {
     setLongBreak(e.target.value);
   };
+
   const formChangeHandler = (e) => {
     e.preventDefault();
-    
-    disptach(settings.shortBreak(shortBreak));
-    disptach(settings.longBreak(longBreak));
+
+    let data = {
+      pomTime: +pomodoroTime,
+      shortTime: +shortBreak,
+      longTime: +longBreak,
+    };
+
+    dispatch(setTimes(data));
+    props.onCloseModal(false);
   };
 
-  const dispatch = useDispatch();
   const modalIsHideHandler = () => {
     dispatch(showAction.toggle());
   };
-  const timeChangeHandler = (e) => {
-    let name = e.target.value;
-    dispatch(settings.updateTime(name));
-  };
 
   return (
-    <div onClick={formChangeHandler} className={classes.container}>
+    <div className={classes.container}>
       {/* nav */}
       <div className={classes.navModal}>
         <div className={classes.navModal1}>
           <h2>TIMER SETTIG</h2>
         </div>
         <div className={classes.closes}>
-          <img src={close} onClick={modalIsHideHandler} />
+          <img src={close} onClick={() => props.onCloseModal(false)} />
         </div>
       </div>
       {/* main */}
@@ -81,7 +85,7 @@ const ModalOverlay = () => {
       </div>
       {/* footer */}
       <div className={classes.footer}>
-        <button onClick={modalIsHideHandler}>OK</button>
+        <button onClick={formChangeHandler}>OK</button>
       </div>
     </div>
   );
