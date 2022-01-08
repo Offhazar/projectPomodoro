@@ -1,4 +1,4 @@
-.mainContainer {
+/* .mainContainer {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -28,7 +28,7 @@
   order: 0;
   flex-grow: 0;
   margin: 6px 0px;
-}
+} */
 .btnFoces {
   font-style: normal;
   font-weight: bold;
@@ -64,7 +64,7 @@
   margin: 0px 12px;
   border: none;
 }
-.timer {
+/* .timer {
   position: static;
   width: 337px;
   height: 146px;
@@ -120,4 +120,4 @@
   text-transform: uppercase;
   color: #db524d;
   border: none;
-}
+} */

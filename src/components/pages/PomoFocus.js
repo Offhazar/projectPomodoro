@@ -1,16 +1,16 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Switch } from 'react-router-dom';
 import classes from '../main/Main.module.css';
 const PomoFocus = () => {
   return (
     <>
-      <NavLink className={classes.btnFoces} to="/pomo">
-        Pomofocus
+      <NavLink className={classes.btnFoces} to="/pomo" exact>
+        PomoBreak
       </NavLink>
       <NavLink className={classes.btnShort} to="/short">
-        Short Break
+        ShortBreak
       </NavLink>
       <NavLink className={classes.btnLong} to="/long">
-        Long Break
+        LongBreak
       </NavLink>
     </>
   );
