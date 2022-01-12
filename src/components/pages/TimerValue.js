@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import vector from '../../assets/Vector.png';
+import Long from '../bntComponent/Long';
+import NextBtn from '../bntComponent/StartBtn';
+import Pomodoros from '../bntComponent/Pomdoro';
+import Short from '../bntComponent/Short.js.js';
 import { setCurrentTime } from '../../store/Settings';
 import styles from './TimerValue.module.css';
+import NextImg from '../bntComponent/NextImg';
 
 const TimerValue = (props) => {
-  const currentTime = useSelector((state) => state.settings.currentTime);
+  const currentTime = useSelector((state) => state.settings.saveMoreTime);
+  const pomo = useSelector((state) => state.settings.times.pomTime);
+  const short = useSelector((state) => state.settings.times.shortTime);
+  const long = useSelector((state) => state.settings.times.longTime);
 
-  // React.useEffect(() => )
   const dispatch = useDispatch();
 
-  
-  const [initMinutes, setInitMinutes] = useState(currentTime.time);
+  const [initMinutes, setInitMinutes] = useState(pomo);
   const initSeconds = 0;
-  
-  React.useEffect(() => setInitMinutes(currentTime.time), [currentTime])
 
-  
+  React.useEffect(() => setInitMinutes(currentTime.time), [currentTime]);
+
   const [time, setTime] = useState({
     m: initMinutes,
     s: initSeconds,
@@ -64,7 +68,7 @@ const TimerValue = (props) => {
     clearInterval(timer);
   };
 
-  //   чтобы отменить таймер. не удалять
+  // чтобы отменить таймер. не удалять
   const cancelTimer = () => {
     setCheked(false);
     clearInterval(timer);
@@ -85,58 +89,92 @@ const TimerValue = (props) => {
     [bodyColor]
   );
 
-  console.log(currentTime);
-
   function changeTimer(value) {
     pauseTimer();
+    cancelTimer();
     if (checked) {
-      if (window.confirm('Do you want to change Timer ?')) {
+      if (
+        window.confirm(
+          'The timer is still running, are you sure you want to switch?'
+        )
+      ) {
         setInitMinutes(value.time);
         dispatch(setCurrentTime(value));
         setBodyColor(value.bodyColor);
         pauseTimer();
+        cancelTimer();
       } else {
         startTimer();
       }
     } else {
-      // setInitMinutes(value);
-      // setInitMinutes(currentTime.time);
       dispatch(setCurrentTime(value));
       setBodyColor(value.bodyColor);
     }
   }
 
+  useEffect(() => {
+    changeTimer({ name: 'pomodor', time: pomo, bodyColor: '#DB524D' });
+  }, [pomo]);
+
+  //
+
+  let pomodorosNext = {
+    name: 'pomodor',
+    time: pomo,
+    bodyColor: '#DB524D',
+  };
+  let shortNext = {
+    name: 'shortTime',
+    time: short,
+    bodyColor: '#468E91',
+  };
+  let longNext = {
+    name: 'longTime',
+    time: long,
+    bodyColor: '#437EA8',
+  };
+
+  const changeModeNext = () => {
+    let nextTime = pomodorosNext;
+    if (currentTime.name === pomodorosNext.name) nextTime = shortNext;
+    if (currentTime.name === shortNext.name) nextTime = longNext;
+
+    pauseTimer();
+    if (
+      window.confirm(
+        'Are you sure you want to finish the round early? (The remaining time will not be counted in the report.)'
+      )
+    ) {
+      dispatch(setCurrentTime(nextTime));
+      setInitMinutes(nextTime.time);
+      setBodyColor(nextTime.bodyColor);
+
+      pauseTimer();
+      cancelTimer();
+    } else {
+      startTimer();
+    }
+  };
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.btnKing}>
-        <button
-          className={styles.btnFoces}
-          onClick={() =>
-            changeTimer({ name: 'pomodor', time: 25, bodyColor: '#DB524D' })
-          }
-        >
-          PomoBreak
-        </button>
-
-        <button
-          className={styles.btnShort}
-          onClick={() =>
-            changeTimer({ name: 'shortTime', time: 5, bodyColor: '#468E91' })
-          }
-        >
-          ShortBreak
-        </button>
-
-        <button
-          className={styles.btnLong}
-          onClick={() =>
-            changeTimer({ name: 'longTime', time: 10, bodyColor: '#437EA8' })
-          }
-        >
-          LongBreak
-        </button>
+        <Pomodoros
+          pomodorosNext={pomodorosNext}
+          bodyColor={bodyColor}
+          changeTimer={changeTimer}
+        />
+        <Short
+          shortNext={shortNext}
+          bodyColor={bodyColor}
+          changeTimer={changeTimer}
+        />
+        <Long
+          longNext={longNext}
+          bodyColor={bodyColor}
+          changeTimer={changeTimer}
+        />
       </div>
-
       <div className={styles.btnKing}></div>
       <div>
         <div className={styles.timer}>
@@ -144,11 +182,13 @@ const TimerValue = (props) => {
           {time.s < 10 ? `0${time.s}` : time.s}
         </div>
       </div>
-      <div className={styles.btnStop}>
-        <button className={styles.stop} onClick={Raspredelyator}>
-          {checked ? 'STOP' : 'START'}
-        </button>
-        <img src={vector} />
+      <div className={`${styles.btnStop} `}>
+        <NextBtn
+          bodyColor={bodyColor}
+          Raspredelyator={Raspredelyator}
+          checked={checked}
+        />
+        <NextImg checked={checked} changeModeNext={changeModeNext} />
       </div>
     </div>
   );

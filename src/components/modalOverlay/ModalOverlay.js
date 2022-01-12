@@ -1,9 +1,8 @@
 import classes from './ModalOverlay.module.css';
 import close from '../../assets/close.png';
 import { useState } from 'react';
-import { showAction } from '../../store/Switch';
-import { useDispatch } from 'react-redux';
-import { setTimes, settings } from '../../store/Settings';
+import { useDispatch, useSelector } from 'react-redux';
+import { setTimes } from '../../store/Settings';
 
 const ModalOverlay = (props) => {
   const [pomodoroTime, setPomodoroTime] = useState(0);
@@ -34,11 +33,9 @@ const ModalOverlay = (props) => {
     dispatch(setTimes(data));
     props.onCloseModal(false);
   };
-
-  const modalIsHideHandler = () => {
-    dispatch(showAction.toggle());
-  };
-
+  const pomo = useSelector((state) => state.settings.times.pomTime);
+  const short = useSelector((state) => state.settings.times.shortTime);
+  const long = useSelector((state) => state.settings.times.longTime);
   return (
     <div className={classes.container}>
       {/* nav */}
@@ -50,6 +47,7 @@ const ModalOverlay = (props) => {
           <img src={close} onClick={() => props.onCloseModal(false)} />
         </div>
       </div>
+      {console.log()}
       {/* main */}
       <div className={classes.mainModal}>
         <div>
@@ -63,15 +61,27 @@ const ModalOverlay = (props) => {
       </div>
       <div>
         <div className={classes.mainModalInput}>
-          <input type="number" onChange={pomodoroTimeChangeHandler} />
-          <input type="number" onChange={shortbreakTimeChangeHandler} />
-          <input type="number" onChange={longBreakTimeChangeHandler} />
+          <input
+            type="number"
+            defaultValue={pomo}
+            onChange={pomodoroTimeChangeHandler}
+          />
+          <input
+            type="number"
+            defaultValue={short}
+            onChange={shortbreakTimeChangeHandler}
+          />
+          <input
+            type="number"
+            defaultValue={long}
+            onChange={longBreakTimeChangeHandler}
+          />
         </div>
       </div>
       {/* header */}
       <div className={classes.headerModal}>
         <h4>Auto start Breaks?</h4>
-        <input type="checkbox" />
+        <input type="checkbox" defaultValue={true} />
       </div>
       {/* header2 */}
       <div className={classes.headerModal2}>

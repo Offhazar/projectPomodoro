@@ -1,0 +1,17 @@
+.btnShort {
+  width: 115px;
+  height: 28px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  background: none;
+  border: none;
+}
+.btnShortBg {
+  width: 115px;
+  height: 28px;
+  border-radius: 6px;
+  background-color: #468e91;
+}
