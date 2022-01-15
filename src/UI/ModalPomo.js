@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { createPortal } from 'react-dom';
-import ModalOverlay from '../components/modalOverlay/ModalOverlay';
 import classes from './ModalPomo.module.css';
 
 const ModalPomo = (props) => {

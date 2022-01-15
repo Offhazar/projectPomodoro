@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Long from '../bntComponent/Long';
 import NextBtn from '../bntComponent/StartBtn';
 import Pomodoros from '../bntComponent/Pomdoro';
 import Short from '../bntComponent/Short.js.js';
-import { setCurrentTime } from '../../store/Settings';
+import { setCurrentTime, setIntervalMin } from '../../store/Settings';
 import styles from './TimerValue.module.css';
 import NextImg from '../bntComponent/NextImg';
 
 const TimerValue = (props) => {
   const currentTime = useSelector((state) => state.settings.saveMoreTime);
+  const interval = useSelector((state) => state.settings.interval);
+
   const pomo = useSelector((state) => state.settings.times.pomTime);
   const short = useSelector((state) => state.settings.times.shortTime);
   const long = useSelector((state) => state.settings.times.longTime);
+
+  const autoStartPomo = useSelector((state) => state.settings.autoPomodoros);
+  const autoStartBreaks = useSelector((state) => state.settings.autoBreaks);
 
   const dispatch = useDispatch();
 
@@ -25,7 +30,9 @@ const TimerValue = (props) => {
     m: initMinutes,
     s: initSeconds,
   });
+
   // пригодится при смене минут
+
   useEffect(() => {
     setTime({
       m: initMinutes,
@@ -33,9 +40,26 @@ const TimerValue = (props) => {
     });
   }, [initMinutes]);
 
+  let pomodorosNext = {
+    name: 'pomodor',
+    time: pomo,
+    bodyColor: '#DB524D',
+  };
+  let shortNext = {
+    name: 'shortTime',
+    time: short,
+    bodyColor: '#468E91',
+  };
+  let longNext = {
+    name: 'longTime',
+    time: long,
+    bodyColor: '#437EA8',
+  };
+
   const [timer, setTimer] = useState(null); //
   const [checked, setCheked] = useState(false); // для изменения start на pause
-  const startTimer = () => {
+
+  const startTimer = useCallback(() => {
     setCheked(true);
     let myInterval = setInterval(() => {
       setTime((time) => {
@@ -48,7 +72,6 @@ const TimerValue = (props) => {
         // если всё равно нулю, останавливает таймер
         if (time.s === 0) {
           if (time.m === 0) {
-            clearInterval(myInterval);
           } else if (time.m > 0) {
             updatedTime.m--;
             updatedTime.s = 59;
@@ -61,8 +84,103 @@ const TimerValue = (props) => {
       });
     }, 1000);
     setTimer(myInterval);
+  }, []);
+
+  useEffect(() => {
+    if (time.s === 0) {
+      if (time.m === 0) {
+        clearInterval(timer);
+        changeNext();
+      }
+    }
+  }, [time]);
+  const [nextLv, setNextLv] = useState(0);
+  const [startNextLv, setStartNextLv] = useState(false);
+
+  //переход на другой баттон когда заканчиваеться время
+  const changeNext = () => {
+    let nextTime = pomodorosNext;
+    if (currentTime.name === pomodorosNext.name) {
+      if (interval > 1) {
+        dispatch(setIntervalMin());
+        setNextLv((preva) => preva + 1);
+        nextTime = shortNext;
+        setStartNextLv(true);
+        dispatch(setCurrentTime(nextTime));
+        setInitMinutes(nextTime.time);
+        setBodyColor(nextTime.bodyColor);
+        cancelTimer();
+      } else {
+        setNextLv((preva) => preva + 1);
+        nextTime = longNext;
+        dispatch(setCurrentTime(nextTime));
+        setInitMinutes(nextTime.time);
+        setBodyColor(nextTime.bodyColor);
+        setStartNextLv(true);
+        cancelTimer();
+      }
+    }
+    if (currentTime.name === shortNext.name) {
+      if (interval > 0) {
+        nextTime = pomodorosNext;
+        dispatch(setCurrentTime(nextTime));
+        setInitMinutes(nextTime.time);
+        setBodyColor(nextTime.bodyColor);
+        cancelTimer();
+      }
+    }
+    if (currentTime.name === longNext.name) {
+      if (interval > 1) {
+        dispatch(setInterval(nextLv));
+        setNextLv(0);
+        nextTime = pomodorosNext;
+        dispatch(setCurrentTime(nextTime));
+        setInitMinutes(nextTime.time);
+        setBodyColor(nextTime.bodyColor);
+        cancelTimer();
+      } else {
+        setNextLv(0);
+        nextTime = pomodorosNext;
+        dispatch(setCurrentTime(nextTime));
+        setInitMinutes(nextTime.time);
+        setBodyColor(nextTime.bodyColor);
+        cancelTimer();
+      }
+    }
   };
-  // чтобы остановить таймер
+
+  useEffect(() => {
+    if (currentTime.name === shortNext.name) {
+      if (startNextLv) {
+        if (autoStartBreaks) {
+          startTimer();
+        }
+      }
+    }
+  }, [startNextLv, autoStartBreaks, startTimer, currentTime]);
+
+  useEffect(() => {
+    if (currentTime.name === pomodorosNext.name) {
+      if (startNextLv) {
+        if (autoStartPomo) {
+          startTimer();
+        }
+      }
+    }
+  }, [startNextLv, autoStartPomo, startTimer, currentTime]);
+
+  useEffect(() => {
+    if (currentTime.name === longNext.name) {
+      if (autoStartBreaks) {
+        if (startNextLv) {
+          if (autoStartPomo) {
+            startTimer();
+          }
+        }
+      }
+    }
+  }, [autoStartPomo, autoStartBreaks, startTimer, startNextLv, currentTime]);
+
   const pauseTimer = () => {
     setCheked(false);
     clearInterval(timer);
@@ -89,9 +207,9 @@ const TimerValue = (props) => {
     [bodyColor]
   );
 
+  //функицию используеться когда нажамают на баттон
   function changeTimer(value) {
     pauseTimer();
-    cancelTimer();
     if (checked) {
       if (
         window.confirm(
@@ -112,28 +230,12 @@ const TimerValue = (props) => {
     }
   }
 
+  // что бы обновлять таймер когда берем значение у инпута
   useEffect(() => {
     changeTimer({ name: 'pomodor', time: pomo, bodyColor: '#DB524D' });
   }, [pomo]);
 
-  //
-
-  let pomodorosNext = {
-    name: 'pomodor',
-    time: pomo,
-    bodyColor: '#DB524D',
-  };
-  let shortNext = {
-    name: 'shortTime',
-    time: short,
-    bodyColor: '#468E91',
-  };
-  let longNext = {
-    name: 'longTime',
-    time: long,
-    bodyColor: '#437EA8',
-  };
-
+  // функиця для img next
   const changeModeNext = () => {
     let nextTime = pomodorosNext;
     if (currentTime.name === pomodorosNext.name) nextTime = shortNext;
