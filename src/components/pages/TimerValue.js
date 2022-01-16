@@ -82,7 +82,7 @@ const TimerValue = (props) => {
         }
         return updatedTime;
       });
-    }, 1000);
+    }, 100);
     setTimer(myInterval);
   }, []);
 
@@ -96,7 +96,6 @@ const TimerValue = (props) => {
   }, [time]);
   const [nextLv, setNextLv] = useState(0);
   const [startNextLv, setStartNextLv] = useState(false);
-
   //переход на другой баттон когда заканчиваеться время
   const changeNext = () => {
     let nextTime = pomodorosNext;
