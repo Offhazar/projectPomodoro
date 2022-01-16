@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Long from '../bntComponent/Long';
 import NextBtn from '../bntComponent/StartBtn';
@@ -7,6 +7,7 @@ import Short from '../bntComponent/Short.js.js';
 import { setCurrentTime, setIntervalMin } from '../../store/Settings';
 import styles from './TimerValue.module.css';
 import NextImg from '../bntComponent/NextImg';
+import TimerSettings from '../helpers/TimeSettings';
 
 const TimerValue = (props) => {
   const currentTime = useSelector((state) => state.settings.saveMoreTime);
@@ -21,24 +22,34 @@ const TimerValue = (props) => {
 
   const dispatch = useDispatch();
 
-  const [initMinutes, setInitMinutes] = useState(pomo);
-  const initSeconds = 0;
+  const {
+    cancelTimer,
+    pauseTimer,
+    setInitMinutes,
+    timer,
+    startTimer,
+    checked,
+    time,
+  } = TimerSettings(pomo);
 
-  React.useEffect(() => setInitMinutes(currentTime.time), [currentTime]);
+  // const [initMinutes, setInitMinutes] = useState(pomo);
+  // const initSeconds = 0;
 
-  const [time, setTime] = useState({
-    m: initMinutes,
-    s: initSeconds,
-  });
+  // React.useEffect(() => setInitMinutes(currentTime.time), [currentTime]);
+
+  // const [time, setTime] = useState({
+  //   m: initMinutes,
+  //   s: initSeconds,
+  // });
 
   // пригодится при смене минут
 
-  useEffect(() => {
-    setTime({
-      m: initMinutes,
-      s: initSeconds,
-    });
-  }, [initMinutes]);
+  // useEffect(() => {
+  //   setTime({
+  //     m: initMinutes,
+  //     s: initSeconds,
+  //   });
+  // }, [initMinutes]);
 
   let pomodorosNext = {
     name: 'pomodor',
@@ -56,35 +67,35 @@ const TimerValue = (props) => {
     bodyColor: '#437EA8',
   };
 
-  const [timer, setTimer] = useState(null); //
-  const [checked, setCheked] = useState(false); // для изменения start на pause
+  // const [timer, setTimer] = useState(null); //
+  // const [checked, setCheked] = useState(false); // для изменения start на pause
 
-  const startTimer = useCallback(() => {
-    setCheked(true);
-    let myInterval = setInterval(() => {
-      setTime((time) => {
-        // time пред. состояние
-        const updatedTime = { ...time }; // { s: '', m: ''}
-        // если секунда больше нуля, она будет уменьшаться
-        if (time.s > 0) {
-          updatedTime.s--;
-        }
-        // если всё равно нулю, останавливает таймер
-        if (time.s === 0) {
-          if (time.m === 0) {
-          } else if (time.m > 0) {
-            updatedTime.m--;
-            updatedTime.s = 59;
-          } else if (updatedTime.h > 0) {
-            updatedTime.m = 59;
-            updatedTime.s = 59;
-          }
-        }
-        return updatedTime;
-      });
-    }, 100);
-    setTimer(myInterval);
-  }, []);
+  // const startTimer = useCallback(() => {
+  //   setCheked(true);
+  //   let myInterval = setInterval(() => {
+  //     setTime((time) => {
+  //       // time пред. состояние
+  //       const updatedTime = { ...time }; // { s: '', m: ''}
+  //       // если секунда больше нуля, она будет уменьшаться
+  //       if (time.s > 0) {
+  //         updatedTime.s--;
+  //       }
+  //       // если всё равно нулю, останавливает таймер
+  //       if (time.s === 0) {
+  //         if (time.m === 0) {
+  //         } else if (time.m > 0) {
+  //           updatedTime.m--;
+  //           updatedTime.s = 59;
+  //         } else if (updatedTime.h > 0) {
+  //           updatedTime.m = 59;
+  //           updatedTime.s = 59;
+  //         }
+  //       }
+  //       return updatedTime;
+  //     });
+  //   }, 100);
+  //   setTimer(myInterval);
+  // }, []);
 
   useEffect(() => {
     if (time.s === 0) {
@@ -93,7 +104,7 @@ const TimerValue = (props) => {
         changeNext();
       }
     }
-  }, [time]);
+  }, [time, timer]);
   const [nextLv, setNextLv] = useState(0);
   const [startNextLv, setStartNextLv] = useState(false);
   //переход на другой баттон когда заканчиваеться время
@@ -180,20 +191,20 @@ const TimerValue = (props) => {
     }
   }, [autoStartPomo, autoStartBreaks, startTimer, startNextLv, currentTime]);
 
-  const pauseTimer = () => {
-    setCheked(false);
-    clearInterval(timer);
-  };
+  // const pauseTimer = () => {
+  //   setCheked(false);
+  //   clearInterval(timer);
+  // };
 
   // чтобы отменить таймер. не удалять
-  const cancelTimer = () => {
-    setCheked(false);
-    clearInterval(timer);
-    setTime({
-      m: initMinutes,
-      s: initSeconds,
-    });
-  };
+  // const cancelTimer = () => {
+  //   setCheked(false);
+  //   clearInterval(timer);
+  //   setTime({
+  //     m: initMinutes,
+  //     s: initSeconds,
+  //   });
+  // };
 
   function Raspredelyator() {
     checked ? pauseTimer() : startTimer();
