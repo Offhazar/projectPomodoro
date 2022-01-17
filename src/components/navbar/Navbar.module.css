@@ -1,3 +1,17 @@
+.container {
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 0.0625rem;
+  margin-bottom: 2.5rem;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.progress {
+  height: 0.1875rem;
+  border-radius: 6.25rem;
+  background-color: white;
+  transform: translateY(-0.0625rem);
+}
 .headerContainer {
   display: flex;
   justify-content: space-around;
@@ -86,13 +100,4 @@
 }
 .headerBtn {
   display: flex;
-}
-.headerLine {
-  display: flex;
-  justify-content: center;
-}
-.headerLine img {
-  width: 1020px;
-  left: 266px;
-  top: 130px;
 }

@@ -1,12 +1,12 @@
 import './Pomodor.css';
 import Navbar from './navbar/Navbar';
-import Main from './main/Main';
+import TimerValue from './pages/TimerValue';
 
 const Pomodor = () => {
   return (
     <div className="container">
       <Navbar />
-      <Main />
+      <TimerValue />
     </div>
   );
 };

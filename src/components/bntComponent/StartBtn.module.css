@@ -1,0 +1,31 @@
+.stop {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 24px;
+  position: static;
+  width: 150px;
+  height: 60px;
+  left: 0px;
+  top: 0px;
+  background: #ffffff;
+  border-radius: 6px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 59px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 44px;
+  text-transform: uppercase;
+  color: #db524d;
+  border: none;
+}
+.btnlongBreaks {
+  color: #437ea8;
+}
+.btnShortBreak {
+  color: #468e91;
+}
