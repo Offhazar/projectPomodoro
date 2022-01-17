@@ -4,10 +4,13 @@ import group2 from '../../assets/Group2.png';
 import React from 'react';
 import ModalPomo from '../../UI/ModalPomo';
 import ModalOverlay from '../modalOverlay/ModalOverlay';
+import { useSelector } from 'react-redux';
 
 const Navbar = (props) => {
   const [isShow, setIsShow] = React.useState(false);
   // const pomoTime = useSelector((state) => state.settings.saveMoreTime);
+
+  const progres = useSelector((state) => state.settings.progress);
 
   // const [progress, setProgress] = useState(0);
   // const procent = (progress / (pomoTime * 60)) * 100;
@@ -15,6 +18,7 @@ const Navbar = (props) => {
   function modalIsSHowHandler() {
     setIsShow((prev) => (prev = !prev));
   }
+  console.log(progres);
 
   return (
     <>
@@ -33,7 +37,7 @@ const Navbar = (props) => {
       </div>
       <main>{props.children}</main>
       <div className={classes.container}>
-        <div className={classes.progress} style={{ width: '200px' }} />
+        <div className={classes.progress} style={{ width: `${progres}%` }} />
       </div>
 
       {isShow && (

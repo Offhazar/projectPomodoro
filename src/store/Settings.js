@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getPercent } from '../components/main/Main';
 
 const init = {
   saveMoreTime: { name: 'pomodoro', time: 1 },
