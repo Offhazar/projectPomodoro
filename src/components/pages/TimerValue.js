@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Long from '../bntComponent/Long';
 import NextBtn from '../bntComponent/StartBtn';
@@ -206,7 +206,7 @@ const TimerValue = (props) => {
     [bodyColor]
   );
 
-  //функицию используеться когда нажамают на баттон
+  //функицию используеться когда нажимают на баттон
   function changeTimer(value) {
     pauseTimer();
     if (checked) {
