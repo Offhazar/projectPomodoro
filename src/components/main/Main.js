@@ -1,27 +1,41 @@
-import classes from './Main.module.css';
-import vector from '../../assets/Vector.png';
-import PomoFocus from '../pages/PomoFocus';
-import { Route } from 'react-router-dom';
+// import classes from './Main.module.css';
 
-const Main = () => {
-  return (
-    <>
-      <div className={classes.mainContainer}>
-        <div className={classes.btnKing}>
-          <Route path="/">
-            <PomoFocus />
-          </Route>
-        </div>
-        <div>
-          <div className={classes.timer}>25 00</div>
-        </div>
-        <div className={classes.btnStop}>
-          <button className={classes.stop}> stop</button>
-          <img src={vector} />
-        </div>
-      </div>
-    </>
-  );
-};
+// import { useState, useRef, useEffect } from 'react';
+// import { useSelector } from 'react-redux';
+// import TimerValue from '../pages/TimerValue';
 
-export default Main;
+// const Main = () => {
+//   return (
+//     <>
+//       {/* <TimerValue /> */}
+//       {/* <Route path="/" exact>
+//           <Redirect to="/pomo" />
+//         </Route>
+//         <Route path="/pomo">
+//           <PomoBreak />
+//         </Route>
+//         <Route path="/short">
+//           <ShortBreak />
+//         </Route>
+//         <Route path="/long">
+//           <LongBreak />
+//         </Route> */}
+//       {/* <div>
+//           <div>
+//             <div className={classes.timer}>
+//               {time.m < 10 ? `0${time.m}` : time.m}:
+//               {time.s < 10 ? `0${time.s}` : time.s}
+//             </div>
+//           </div>
+//           <div className={classes.btnStop}>
+//             <button className={classes.stop} onClick={Raspredelyator}>
+//               {checked ? 'PAUSE' : 'START'}
+//             </button>
+//             <img onClick={stopTimer} src={vector} />
+//           </div>
+//         </div> */}
+//     </>
+//   );
+// };
+
+// export default Main;

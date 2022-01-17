@@ -1,0 +1,15 @@
+.btnFoces {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  background: none;
+  border: none;
+}
+.btnPomoBg {
+  width: 115px;
+  height: 28px;
+  border-radius: 6px;
+  background-color: #db524d;
+}
